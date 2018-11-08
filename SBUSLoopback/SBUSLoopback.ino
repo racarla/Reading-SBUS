@@ -25,6 +25,12 @@
 * testing the Teensy SBUS Backpack (http://bolderflight.com/products/teensy/sbus). 
 * The sine amplitude will be set to make the servo travel across its entire range
 * and the excitation frequency will be 1 Hz.
+*
+* After these outputs are sent, they are looped back by connecting the SBUS RX
+* and SBUS TX pins. The SBUS commands are read and printed to show that they
+* are the same that were sent. This is used to validate properly encoding,
+* transmitting, receiving, and decoding SBUS messages using the 
+* Teensy SBUS Backpack (http://bolderflight.com/products/teensy/sbus). 
 */
 
 #include "SBUS.h"
@@ -53,6 +59,7 @@ void setup()
 
 void loop()
 {
+  /* print the received values */
   if (sbus.readCal(&SbusRead[0], &Failsafe, &LostFrame)) {
     Serial.print(SbusRead[0]);
     Serial.print("\t");

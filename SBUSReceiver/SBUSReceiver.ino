@@ -21,10 +21,9 @@
 */
 
 /*
-* Description: this program will output a sine wave on all 16 SBUS channels for 
-* testing the Teensy SBUS Backpack (http://bolderflight.com/products/teensy/sbus). 
-* The sine amplitude will be set to make the servo travel across its entire range
-* and the excitation frequency will be 1 Hz.
+* Description: this program will print all 16 SBUS channel values
+* plus lost frame and failsafe as read from an SBUS receiver using
+* the Teensy SBUS Backpack (http://bolderflight.com/products/teensy/sbus). 
 */
 
 #include "SBUS.h"
@@ -47,6 +46,7 @@ void setup()
 
 void loop()
 {
+  /* print the received values */
   if (sbus.readCal(&SbusRead[0], &Failsafe, &LostFrame)) {
     for (unsigned int i = 0; i < sizeof(SbusRead) / sizeof(float); i++) {
       Serial.print(SbusRead[i]);
